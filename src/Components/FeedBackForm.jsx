@@ -6,7 +6,8 @@ export const FeedbackForm = () => {
         {
             name: '',
             email: '',
-            feedback: ''
+            feedback: '',
+            rating: ''
         }
     );
 
@@ -20,12 +21,13 @@ export const FeedbackForm = () => {
         );
 
 
-        const handleSubmit = (event) => {
+    const handleSubmit = (event) => {
             event.preventDefault();
             const confirmationMessage = `
               Name: ${formdata.name}
               Email: ${formdata.email}
               Feedback: ${formdata.feedback}
+              Rating: ${formdata.rating}
             `;
             const isConfirmed = window.confirm(`Please confirm your details:\n\n${confirmationMessage}`);
             if (isConfirmed) {
@@ -33,11 +35,22 @@ export const FeedbackForm = () => {
               setFormData({
                 name: '',
                 email: '',
-                feedback: ''
+                feedback: '',
+                rating: ''
               });
               alert('Thank you for your valuable feedback!');
             }
-          };
+          };    
+
+
+    const handleChange = (rate) =>{
+        setFormData(
+            {
+             ...formdata,
+            rating: rate
+            }
+        );
+    };
        
 
 
@@ -81,6 +94,39 @@ export const FeedbackForm = () => {
               })
           }
         ></textarea>
+         <div style={{display:'flex',gap:'10px',flexDirection:'column'}}>
+                    <span>Rate Us:</span>
+                    <p><input
+                        type="radio"
+                        name="rating"
+                        value="1"
+                        onChange={e => handleChange(e.target.value)}
+                    /> 1</p>
+                  <p>  <input
+                        type="radio"
+                        name="rating"
+                        value="2"
+                        onChange={e => handleChange(e.target.value)}
+                    /> 2</p>
+                  <p>  <input
+                        type="radio"
+                        name="rating"
+                        value="3"
+                        onChange={e => handleChange(e.target.value)}
+                    /> 3</p>
+                   <p> <input
+                        type="radio"
+                        name="rating"
+                        value="4"
+                        onChange={e => handleChange(e.target.value)}
+                    /> 4</p>
+                    <p><input
+                        type="radio"
+                        name="rating"
+                        value="5"
+                        onChange={e => handleChange(e.target.value)}
+                    /> 5</p>
+                </div>
         <button onClick={(event) => {handleSubmit(event)}} type="submit">Submit Feedback</button>
         </form>
       </>
